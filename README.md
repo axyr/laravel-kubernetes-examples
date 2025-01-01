@@ -60,9 +60,13 @@ This script will do the following:
 4. Install a fresh copy of Laravel
 5. Build, tag and push the Docker image to the local registry
 
+## Running a Kubernetes example
+
 From here you can try the Kubernetes examples.
 For example:
 
 ```bash
 kubectl apply -f ./kubernetes/laravel-single-pod
 ```
+
+This will create all Kubernetes configurations in your local cluster.
