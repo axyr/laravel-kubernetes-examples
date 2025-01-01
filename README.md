@@ -38,31 +38,31 @@ Examples of desktop applications that allow you to run Docker and Kubernetes on 
 
 Most these applications require you to enable Kubernetes support manually.
 
-# Installation
+## Creating a Docker image with Laravel
 
-## TL;DR
+To run the examples you need a Docker image with Laravel installed on it.
 
-Run the following bash command from the command line:
+The examples asume a local Docker registry with a `laravel-php` image:
 
-```bash 
-bash install.sh
-```
+localhost:5000/laravel-php
 
-## 1. Clone this repository
+The following command does that for you:
 
 ```bash 
-git clone git@github.com:axyr/laravel-kubernetes-examples.git
+bash build-laravel-image.sh
 ```
 
-> From here we assume you have a terminal open in the root directory of the cloned repository.
+This script will do the following:
 
-## 2. [Install Laravel](https://laravel.com/docs/master/installation) in the laravel directory.
+1. Check if PHP is installed
+2. Check if Composer is installed
+3. Create a local Docker registry
+4. Install a fresh copy of Laravel
+5. Build, tag and push the Docker image to the local registry
 
-If you have the Laravel installer installed, you can run the following command from the root directory of thi:
+From here you can try the Kubernetes examples.
+For example:
+
 ```bash
-$ laravel new laravel -f
+kubectl apply -f ./kubernetes/laravel-single-pod
 ```
-
-## Docker Registry
-
-localhost:5000
