@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: laravel-multi-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      initContainers:
+        - name: copy-public
+          image: localhost:5000/laravel-php
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: public
+              mountPath: /home/public
+          command: ["/bin/bash", "-c", "cp -R /app/public/. /home/public"]
+
+      containers:
+        - name: nginx
+          image: nginx:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: nginx.conf
+            - name: code
+              mountPath: /code
+            - name: public
+              mountPath: /home/public
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+        - name: code
+          persistentVolumeClaim:
+            claimName: code
+        - name: public
+          emptyDir: { }

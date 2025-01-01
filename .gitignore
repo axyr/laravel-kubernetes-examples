@@ -1,0 +1,8 @@
+
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+/laravel/*
+!/laravel/

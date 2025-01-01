@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+  namespace: laravel-multi-pod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+        - name: php
+          image: localhost:5000/laravel-php
+          imagePullPolicy: Always
+          env:
+            - name: DB_HOST
+              value: mysql-service
+          volumeMounts:
+            - name: code
+              mountPath: /code
+      volumes:
+        - name: code
+          persistentVolumeClaim:
+            claimName: code
