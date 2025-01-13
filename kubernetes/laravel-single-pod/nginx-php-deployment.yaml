@@ -4,7 +4,6 @@ metadata:
   labels:
     app: nginx-php
   name: nginx-php
-  namespace: laravel-nginx-php-pod
 spec:
   replicas: 2
   revisionHistoryLimit: 1
@@ -18,7 +17,7 @@ spec:
     spec:
       containers:
       - name: php
-        image: localhost:5000/laravel-php
+        image: ghcr.io/axyr/laravel-docker:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 9000
