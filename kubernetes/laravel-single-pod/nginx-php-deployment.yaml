@@ -13,6 +13,7 @@ spec:
   template:
     metadata:
       labels:
+        
         app: nginx-php
     spec:
       containers:
