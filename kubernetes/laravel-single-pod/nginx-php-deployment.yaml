@@ -5,8 +5,8 @@ metadata:
     app: nginx-php
   name: nginx-php
 spec:
-  replicas: 2
-  revisionHistoryLimit: 1
+  replicas: 3
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: nginx-php
