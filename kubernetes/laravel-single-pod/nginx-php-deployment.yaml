@@ -19,6 +19,7 @@ spec:
       containers:
       - name: php
         image: ghcr.io/axyr/laravel-docker:latest
+        platform: linux/amd64
         imagePullPolicy: Always
         ports:
           - containerPort: 9000
